@@ -1,0 +1,38 @@
+﻿@model ElectonicStore.Models.ViewModels.ProductCreateViewModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <form enctype="multipart/form-data" method="post" asp-action="Create">
+            <div class="form-group">
+                <label>Product Name</label>
+                <input required asp-for="@Model.product.Name" type="text" class="form-control" placeholder="Name">
+            </div>
+            <div class="form-group">
+                <label>Price</label>
+                <input required asp-for="@Model.product.Price" type="text" class="form-control" placeholder="Price">
+            </div>
+            <div class="form-group">
+                <label>Quantity</label>
+                <input required asp-for="@Model.product.Quantity" type="number" class="form-control" placeholder="Quantity">
+            </div>
+            <div class="form-group">
+                <label>Category</label>
+                <select asp-for="@Model.product.CategoryId" required class="form-control">
+                    @foreach (var cat in Model.Categories)
+                    {
+                        <option value="@cat.Id">@cat.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Images</label>
+                <input required type="file" name="photos" multiple="multiple" class="form-control-file">
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">Submit</button>
+        </form>
+    </div>
+    <br />
+</div>

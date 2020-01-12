@@ -1,0 +1,17 @@
+﻿@model ElectonicStore.Models.Category
+@{
+    ViewData["Title"] = "Create";
+}
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <form method="post" asp-action="Create">
+                <div class="form-group">
+                    <label>Category Name</label>
+                    <input required asp-for="@Model.Name" type="text" class="form-control" placeholder="Name">
+                </div>
+                <button type="submit" class="btn btn-primary mb-2">Submit</button>
+            </form>
+        </div>
+    </div>
+

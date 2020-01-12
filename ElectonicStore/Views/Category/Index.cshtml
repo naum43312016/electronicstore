@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Category>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12  bg-white rounded shadow-sm mb-5">
+            <div class="col-12">
+                <a asp-action="Create" class="btn btn-primary float-right">Create</a>
+            </div>
+            <!-- Shopping cart table -->
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="border-0 bg-light">
+                                <div class="p-2 px-3 text-uppercase">Category Name</div>
+                            </th>
+                            <th scope="col" class="border-0 bg-light">
+                                <div class="py-2 text-uppercase">Edit</div>
+                            </th>
+                            <th scope="col" class="border-0 bg-light">
+                                <div class="py-2 text-uppercase">Remove</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    @foreach (var cat in Model)
+                    {
+                        <tbody>
+                            <tr>
+                                <th scope="row" class="border-0">
+                                    <div class="p-2">
+                                        <div class="ml-3 d-inline-block align-middle">
+                                            <h5 class="mb-0">@cat.Name</h5>
+                                        </div>
+                                    </div>
+                                </th>
+                                <td class="border-0 align-middle">
+                                    <a asp-action="update" asp-route-id="@cat.Id" class="text-dark">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    </a>
+                                </td>
+                                
+                                <td class="border-0 align-middle"><a asp-action="Delete" asp-route-id="@cat.Id" class="text-dark"><i class="fa fa-trash"></i></a></td>
+                            </tr>
+                        </tbody>
+                    }
+                </table>
+            </div>
+            <!-- End -->
+        </div>
+    </div>
+</div>
+

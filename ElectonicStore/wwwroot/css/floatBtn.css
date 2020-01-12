@@ -1,0 +1,18 @@
+﻿#btn-wrap {
+    background-repeat: repeat-x;
+    margin-top: 13px;
+}
+
+#btn-wrap .but1 {
+    line-height: 0px;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    display: inline-block;
+    position: relative;
+}
+
+#btn-wrap .but1 a {
+    position: absolute;
+    right: 5px;
+}

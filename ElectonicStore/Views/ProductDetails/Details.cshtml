@@ -1,0 +1,137 @@
+﻿@model ElectonicStore.Models.Product
+@{
+    ViewData["Title"] = "Details";
+    var images = ViewData["images"] as List<string>;
+}
+<!--Product-->
+<div class="container">
+    <div class="card">
+        <div class="row">
+            <div class="col-sm-12 col-md-5 border-right">
+                <article class="gallery-wrap">
+                    <div class="img-big-wrap">
+                        <div> <a href="#"><img class="main-img" src="../../@images[0]"></a></div>
+                    </div> <!-- slider-product.// -->
+                    @if (images.Count > 1)
+                    {
+                        <div class="img-small-wrap">
+                            @for (int i = 1; i < images.Count; i++)
+                            {
+                                @if (images[i].Length > 2)
+                                {
+                                    <div class="item-gallery"> <img class="img-gal" src="../../@images[i]"> </div>
+                                }
+                            }
+                        </div> <!-- slider-nav.// -->
+                    }
+
+                </article> <!-- gallery-wrap .end// -->
+            </div>
+            <div class="col-sm-7 col-md-7">
+                <article class="card-body p-5">
+                    <h3 class="title mb-3">@Model.Name</h3>
+
+                    <p class="price-detail-wrap">
+                        <span class="price h3 text-warning">
+                            <span class="currency">US $</span><span class="num">@Model.Price</span>
+                        </span>
+                    </p> <!-- price-detail-wrap .// -->
+                    <dl class="item-property">
+                        <dt>Description</dt>
+                        <dd>
+                            <p>
+                                @Model.Name
+                            </p>
+                        </dd>
+                    </dl>
+                    <dl class="param param-feature">
+                        <dt>Model#</dt>
+                        <dd>@Model.Id</dd>
+                    </dl>  <!-- item-property-hor .// -->
+                    <dl class="param param-feature">
+                        <dt>Color</dt>
+                        <dd>Black</dd>
+                    </dl>  <!-- item-property-hor .// -->
+                    <dl class="param param-feature">
+                        <dt>Delivery</dt>
+                        <dd>Israel</dd>
+                    </dl>  <!-- item-property-hor .// -->
+
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <dl class="param param-inline">
+                                <dt>Quantity: </dt>
+                                <dd>
+                                    <select class="form-control form-control-sm" id="PrCount" name="count" style="width:70px;">
+                                        <option value="1"> 1 </option>
+                                        <option value="2"> 2 </option>
+                                        <option value="3"> 3 </option>
+                                    </select>
+                                </dd>
+                            </dl>  <!-- item-property .// -->
+                        </div> <!-- col.// -->
+                    </div> <!-- row.// -->
+                    <hr>
+                    <a href="#" class="btn btn-lg btn-primary text-uppercase"> Buy now </a>
+                    <a id="myPopover" onclick="add(@Model.Id)" class="btn btn-lg btn-outline-primary text-uppercase" data-toggle="popover" data-trigger="focus" data-content="Product Successfully added to your Cart!"> <i class="fas fa-shopping-cart"></i> Add to cart </a>
+                </article> <!-- card-body.// -->
+
+            </div> <!-- col.// -->
+        </div> <!-- row.// -->
+    </div> <!-- card.// -->
+</div>
+
+<!--Product Ends-->
+<!--Change image src-->
+<script>
+
+    
+    function add(id) {
+        var product = {
+            productId: id,
+            count: $('#PrCount').val()
+        };
+        $.ajax({
+            url: "/api/AddToCart/add",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(product),
+            success: function (response) {
+                response ? success() : fail();
+            }
+        });
+
+        function success() {
+            
+            $("[data-toggle='popover']").popover('show');
+            setTimeout(function(){ $("[data-toggle='popover']").popover('hide'); }, 2000);
+        }
+        function fail() {
+            alert("It didn't work!")
+        }
+        /*$.ajax({
+            url: '/api/AddToCart',
+            type: 'POST',
+            dataType: 'json',
+            contentType: "application/json",
+            data: JSON.stringify({ AjaxCartobject: tommy }),
+            success: function (data, textStatus, xhr) {
+                console.log("yyy");
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.log('Error in Operation');
+            }
+        });*/
+    }
+
+    $('.img-gal').on({
+        'click': function () {
+            //$('#my_image').attr('src','second.jpg');
+            var src = $(this).attr('src');
+            var srcMain = $('.main-img').attr('src');
+            $(this).attr('src', srcMain);
+            $('.main-img').attr('src', src);
+        }
+    });
+</script>

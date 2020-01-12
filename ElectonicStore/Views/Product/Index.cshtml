@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Product>
+    @{
+        ViewData["Title"] = "Index";
+    }
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12  bg-white rounded shadow-sm mb-5">
+                <div class="col-12">
+                    <a asp-action="Create" class="btn btn-primary float-right">Create</a>
+                </div>
+                <!-- Shopping cart table -->
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="border-0 bg-light">
+                                    <div class="p-2 px-3 text-uppercase">Product Name</div>
+                                </th>
+                                <th scope="col" class="border-0 bg-light">
+                                    <div class="p-2 px-3 text-uppercase">Price</div>
+                                </th>
+                                <th scope="col" class="border-0 bg-light">
+                                    <div class="p-2 px-3 text-uppercase">Quantity</div>
+                                </th>
+                                <th scope="col" class="border-0 bg-light">
+                                    <div class="py-2 text-uppercase">Edit</div>
+                                </th>
+                                <th scope="col" class="border-0 bg-light">
+                                    <div class="py-2 text-uppercase">Remove</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        @foreach (var pr in Model)
+                        {
+                            <tbody>
+                                <tr>
+                                    <td scope="row" class="border-0">
+                                        <div class="p-2">
+                                            <div class="ml-3 d-inline-block align-middle">
+                                                <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">@pr.Name</a></h5><span class="text-muted font-weight-normal font-italic d-block">Category: @pr.Category.Name</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td scope="row" class="border-0">
+                                        <div class="p-2">
+                                            <div class="ml-3 d-inline-block align-middle">
+                                                <h5 class="mb-0">@pr.Price</h5>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td scope="row" class="border-0">
+                                        <div class="p-2">
+                                            <div class="ml-3 d-inline-block align-middle">
+                                                <h5 class="mb-0">@pr.Quantity<h5>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td scope="row" class="border-0">
+                                        <div class="p-2">
+                                            <div class="ml-3 d-inline-block align-middle">
+                                                <a asp-action="Update" asp-route-id="@pr.Id" class="text-dark">
+                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td scope="row" class="border-0">
+                                        <div class="p-2">
+                                            <div class="ml-3 d-inline-block align-middle">
+                                                <a asp-action="Delete" asp-route-id="@pr.Id" class="text-dark"><i class="fa fa-trash"></i></a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        }
+                    </table>
+                </div>
+                <!-- End -->
+            </div>
+        </div>
+    </div>
+

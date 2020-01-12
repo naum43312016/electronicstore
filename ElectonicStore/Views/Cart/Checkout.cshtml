@@ -1,0 +1,54 @@
+﻿@model ElectonicStore.Models.OrderDetails
+@{
+    ViewData["Title"] = "Checkout";
+    var total = (int)ViewData["total"];
+}
+
+    <div class="container">
+        <form method="post" asp-action="Submit" asp-controller="Cart">
+            <div class="row">
+                <div class="col-md-5 col-sm-12">
+
+                    <div class="form-group">
+                        <label asp-for="@Model.Name">Name</label>
+                        <input required asp-for="@Model.Name" type="text" class="form-control" placeholder="Name">
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Email">Email address</label>
+                        <input required asp-for="@Model.Email" type="email" class="form-control" placeholder="Email">
+                    </div>
+                    <input hidden asp-for="@Model.total" value="@total"/>
+                    <div class="form-group">
+                        <label asp-for="@Model.Phone">Phone Number</label>
+                        <input required asp-for="@Model.Phone" type="text" class="form-control" placeholder="Phone">
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.City">City</label>
+                        <input required asp-for="@Model.City" type="text" class="form-control" placeholder="City">
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Address">Address</label>
+                        <input required asp-for="@Model.Address" type="text" class="form-control" placeholder="Adress">
+                    </div>
+                </div>
+                <!--class="row py-5 p-4 bg-white rounded shadow-sm">-->
+                <div class="col-md-6 col-sm-12 bg-white rounded shadow-sm">
+                    <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Order summary </div>
+                    <div class="p-4">
+                        <p class="font-italic mb-4">Shipping and additional costs are calculated based on values you have entered.</p>
+                        <ul class="list-unstyled mb-4">
+                            <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Order Subtotal </strong><strong>$@total</strong></li>
+                            <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Shipping and handling</strong><strong>$0.00</strong></li>
+                            <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tax</strong><strong>$0.00</strong></li>
+                            <li class="d-flex justify-content-between py-3 border-bottom">
+                                <strong class="text-muted">Total</strong>
+                                <h5 class="font-weight-bold">$@total</h5>
+                            </li>
+                        </ul><button type="submit" class="btn btn-dark rounded-pill py-2 btn-block">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+

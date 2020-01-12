@@ -1,0 +1,17 @@
+﻿@model ElectonicStore.Models.Category
+@{
+    ViewData["Title"] = "update";
+}
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <form method="post" asp-action="update">
+                <div class="form-group">
+                    <label>Category Name</label>
+                    <input asp-for="@Model.Id" hidden value="@Model.Id" />
+                    <input required asp-for="@Model.Name" type="text" class="form-control" placeholder=@Model.Name>
+                </div>
+                <button type="submit" class="btn btn-primary mb-2">Submit</button>
+            </form>
+        </div>
+    </div>

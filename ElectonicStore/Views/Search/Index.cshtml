@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "Category";
+    var pageN = (int)ViewData["currentPage"];
+    var pagesCount = (int)ViewData["pagesCount"];
+    var categoryId = (int)ViewData["categoryId"];
+}
+
+<section id="products-album">
+    <div class="container">
+        <div class="row">
+            @if (Model.Count() == 0)
+            {
+                <h1>No products was found...</h1>
+            }
+            @foreach (var pr in Model)
+            {
+
+                char[] spearator = { '*' };
+                String[] strlist = pr.Images.Split(spearator,
+                StringSplitOptions.None);
+                var image = strlist[0];
+
+                <div class="col-md-4 col-sm-12">
+                    <!-- Card -->
+                    <div class="card">
+                        <!-- Card image -->
+                        <div class="view overlay" style="width:340px;height:340px;">
+                            <img class="card-img-top" src="../../@image" alt="Card image cap">
+                            <a asp-controller="ProductDetails" asp-action="Details" asp-route-id="@pr.Id">
+                                <div class="mask rgba-white-slight"></div>
+                            </a>
+                        </div>
+                        <!-- Card content -->
+                        <div class="card-body">
+                            <!-- Title -->
+                            <h4 class="card-title">@pr.Name</h4>
+                            <!-- Text -->
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <!-- Button -->
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="d-flex justify-content-start">
+                                        <span class="price h5">$@pr.Price</span>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="d-flex justify-content-end">
+                                        <a asp-controller="ProductDetails" asp-action="Details" asp-route-id="@pr.Id" class="btn btn-primary">Details</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- Card -->
+                </div>
+            }
+        </div>
+        <ul class="pagination">
+            @for (int i = 1; i <= pagesCount; i++)
+            {
+                if (i == pageN)
+                {
+                    <li class="page-item active"><a class="page-link" asp-controller="home" asp-action="category" asp-route-id="@categoryId" asp-route-page="@i">@i</a></li>
+                }
+                else
+                {
+                    <li class="page-item"><a class="page-link" asp-controller="home" asp-action="category" asp-route-id="@categoryId" asp-route-page="@i">@i</a></li>
+                }
+            }
+        </ul>
+    </div>
+</section>
